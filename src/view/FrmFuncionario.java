@@ -299,6 +299,7 @@ public class FrmFuncionario extends javax.swing.JFrame {
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
         Funcionario fon = new Funcionario();
+        //Itálo eva & adão
         try {
             fon.setCodigo(Integer.parseInt(jtfCodigo.getText()));
             fon.setNome(jtfNome.getText());
