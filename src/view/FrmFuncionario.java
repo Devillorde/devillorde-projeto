@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import newString.TreatStrings;
 public class FrmFuncionario extends javax.swing.JFrame {
+    //renato eva e adao
 
     public FrmFuncionario(String user,String password) {
         initComponents();
