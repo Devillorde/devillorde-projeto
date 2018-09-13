@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import arquivo.*;
 import java.io.File;
-import model.Funcionario;
 import newString.TreatStrings;
 import view.FrmServer;
 
@@ -33,7 +32,6 @@ public class Executar {
                     frmserver.setLog("Cliente: " + cliente.getInetAddress().getHostAddress() + " conectou!");
                     ps = new PrintStream(cliente.getOutputStream());
                     clientes.add(ps);
-                    frmserver.setModelo(cliente.getInetAddress().getHostAddress());
                 } catch (IOException ex) {
                     javax.swing.JOptionPane.showMessageDialog(frmserver, "Erro ao conectar cliente!", "ERRO!!!", javax.swing.JOptionPane.ERROR_MESSAGE);
                 }
@@ -81,16 +79,6 @@ public class Executar {
             }
         }
     };
-
-    public void distribuiMensagem(String msg) {
-        for (PrintStream pcliente : this.clientes) {
-            pcliente.println(msg);
-        }
-    }
-
-    public void stopServer() {
-        distribuiMensagem("[SERVER]: O Servidor foi parado!");
-    }
 
     public boolean start(int porta) {
         try {

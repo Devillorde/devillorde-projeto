@@ -53,15 +53,9 @@ public class FrmServer extends javax.swing.JFrame {
         guiaServidor = new javax.swing.JTabbedPane();
         pServer = new javax.swing.JPanel();
         lblLog = new javax.swing.JLabel();
-        lblOnline = new javax.swing.JLabel();
-        stop = new javax.swing.JButton();
         start = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        modelo = new DefaultListModel();
-        online = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         log = new javax.swing.JTextArea();
-        disconect = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -77,16 +71,6 @@ public class FrmServer extends javax.swing.JFrame {
         lblLog.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblLog.setText("Log");
 
-        lblOnline.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lblOnline.setText("Online");
-
-        stop.setText("Parar");
-        stop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stopActionPerformed(evt);
-            }
-        });
-
         start.setText("Iniciar");
         start.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,21 +78,10 @@ public class FrmServer extends javax.swing.JFrame {
             }
         });
 
-        online.setModel(modelo);
-        jScrollPane1.setViewportView(online);
-
         log.setEditable(false);
         log.setColumns(20);
         log.setRows(5);
         jScrollPane2.setViewportView(log);
-
-        disconect.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        disconect.setText("Desconectar");
-        disconect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                disconectActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pServerLayout = new javax.swing.GroupLayout(pServer);
         pServer.setLayout(pServerLayout);
@@ -117,42 +90,24 @@ public class FrmServer extends javax.swing.JFrame {
             .addGroup(pServerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pServerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pServerLayout.createSequentialGroup()
-                        .addGroup(pServerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pServerLayout.createSequentialGroup()
-                                .addComponent(lblLog, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 248, Short.MAX_VALUE))
-                            .addComponent(jScrollPane2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pServerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pServerLayout.createSequentialGroup()
-                                .addComponent(lblOnline, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(disconect, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pServerLayout.createSequentialGroup()
-                        .addComponent(start, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(stop, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())
+                    .addGroup(pServerLayout.createSequentialGroup()
+                        .addGroup(pServerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblLog, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(start, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(458, 470, Short.MAX_VALUE))))
         );
         pServerLayout.setVerticalGroup(
             pServerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pServerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pServerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(start, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(stop, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(start, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addGroup(pServerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblLog)
-                    .addComponent(lblOnline, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(disconect))
-                .addGap(4, 4, 4)
-                .addGroup(pServerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
+                .addComponent(lblLog)
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -281,19 +236,6 @@ public class FrmServer extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void disconectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disconectActionPerformed
-
-        if (modelo.getSize() > 0) {
-            for (int x = 0; x < modelo.size(); x++) {
-                if (clientesIp.get(x).equals(online.getSelectedValue())) {
-                    setLog(clientesIp.get(x) + " foi removido do servidor");
-                    clientesIp.remove(x);
-                    modelo.remove(x);
-                }
-            }
-        }
-    }//GEN-LAST:event_disconectActionPerformed
-
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
 
         ex = new Executar(this);
@@ -302,7 +244,6 @@ public class FrmServer extends javax.swing.JFrame {
         } else {
             log.setText("Erro ao abrir porta");
         }
-        clientesIp = new ArrayList<String>();
         thread = new Thread(ex.executar);
         thread.start();
     }//GEN-LAST:event_startActionPerformed
@@ -353,17 +294,6 @@ public class FrmServer extends javax.swing.JFrame {
         preencher(ct.getAll());
     }//GEN-LAST:event_jbAtualizarActionPerformed
 
-    private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
-
-        if (thread.isAlive()) {
-            ex.distribuiMensagem("[SERVER]: O Servidor foi parado!");
-            setLog("Servidor parado!");
-            thread.stop();
-        } else {
-            setLog("O servidor já está parado!!!");
-        }
-    }//GEN-LAST:event_stopActionPerformed
-
     public static void main(String args[]) throws UnsupportedLookAndFeelException {
 
         UIManager.setLookAndFeel(new SeaGlassLookAndFeel());
@@ -396,16 +326,11 @@ public class FrmServer extends javax.swing.JFrame {
         log.setText(log.getText() + "\n" + msg);
     }
 
-    public void setModelo(String ip) {
-        modelo.addElement(ip);
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton disconect;
     private javax.swing.JTabbedPane guiaServidor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton jbAtualizar;
@@ -414,16 +339,11 @@ public class FrmServer extends javax.swing.JFrame {
     private javax.swing.JButton jbRemover;
     private javax.swing.JTable jtTodos;
     private javax.swing.JLabel lblLog;
-    private javax.swing.JLabel lblOnline;
     private javax.swing.JTextArea log;
-    private javax.swing.JList<String> online;
-    private DefaultListModel modelo;
     private javax.swing.JPanel pServer;
     private javax.swing.JButton start;
-    private javax.swing.JButton stop;
     // End of variables declaration//GEN-END:variables
     private final int porta = 34197;
-    private List<String> clientesIp;
     private Executar ex;
     private Thread thread;
     private CtrlFuncionario ct;
