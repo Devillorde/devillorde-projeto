@@ -9,6 +9,7 @@ import arquivo.*;
 import java.io.File;
 import newString.TreatStrings;
 import view.FrmServer;
+import model.Funcionario;
 
 public class Executar {
 
@@ -54,10 +55,11 @@ public class Executar {
                 file = IOFile.receiveFile(cliente, fileSize);
                 Arquivo.emArquivo(file, "client", newString.TreatStrings.getExtension(nome));
                 
-                /*CtrlFuncionario ctrl = new CtrlFuncionario(frmserver.getUser(), frmserver.getPassword());
+                CtrlFuncionario ctrl = new CtrlFuncionario(frmserver.getUser(), frmserver.getPassword());
                 Funcionario[] fon = ctrl.getAll();
                 int resultado;
                 File comparar = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/" + "client" + TreatStrings.getExtension(nome));
+                ps.println("Ate aqui deu certo");
                 for (int i = 0; i < fon.length; i++) {
                     File original = new File(fon[i].getBiometria());
                     resultado = Arquivo.compareImage(original, comparar);
@@ -69,7 +71,7 @@ public class Executar {
                         ps.println("true");
                     }
                 }
-                */
+                
                 File trash = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/" + "client" + TreatStrings.getExtension(nome));
                 if(trash.exists()){
                     trash.delete();
