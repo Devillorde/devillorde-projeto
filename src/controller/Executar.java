@@ -48,32 +48,33 @@ public class Executar {
                 PrintStream ps = new PrintStream(cliente.getOutputStream());
                 java.util.Scanner s = new java.util.Scanner(cliente.getInputStream());
                 String nome = s.nextLine();
-                System.out.println("Tá ouvindo");
                 ps.println("Nome arquivo enviado");
                 int fileSize = Integer.parseInt(s.nextLine());
                 ps.println("tamanho arquivo enviado");
                 file = IOFile.receiveFile(cliente, fileSize);
                 Arquivo.emArquivo(file, "client", newString.TreatStrings.getExtension(nome));
-                
+
                 CtrlFuncionario ctrl = new CtrlFuncionario(frmserver.getUser(), frmserver.getPassword());
                 Funcionario[] fon = ctrl.getAll();
                 int resultado;
                 File comparar = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/" + "client" + TreatStrings.getExtension(nome));
-                ps.println("Ate aqui deu certo");
-                for (int i = 0; i < fon.length; i++) {
-                    File original = new File(fon[i].getBiometria());
+                boolean accepted = false;
+                for (Funcionario func : fon) {
+                    File original = new File(func.getBiometria());
                     resultado = Arquivo.compareImage(original, comparar);
-                    if(resultado>=80){
+                    if (resultado >= 80) {
+                        accepted = true;
                         ps.println("true");
-                        ps.println(fon[i].getNome());
-                        ps.println(fon[i].getAcesso());
-                    }else{
-                        ps.println("true");
+                        ps.println(func.getNome());
+                        ps.println(func.getAcesso());
+                        break;
                     }
                 }
-                
+                if (accepted == false) {
+                    ps.println("false");
+                }
                 File trash = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/" + "client" + TreatStrings.getExtension(nome));
-                if(trash.exists()){
+                if (trash.exists()) {
                     trash.delete();
                 }
             } catch (IOException ex) {
