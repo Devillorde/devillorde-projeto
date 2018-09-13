@@ -24,13 +24,10 @@ public class IOFile {
         bf.read(b);
         file = Arquivo.binding(file, b);
         file = Arquivo.adjustBytes(file, fileSize);
-        //bf.close();
-        //s.close();
         return file;
     }
 
     public static void sendFile(Socket socket, byte[] file) throws IOException {
-        PrintStream ps = new PrintStream(socket.getOutputStream());
         java.util.Scanner s = new java.util.Scanner(socket.getInputStream());
         java.io.BufferedOutputStream bf = new java.io.BufferedOutputStream(socket.getOutputStream());
         byte[] b;

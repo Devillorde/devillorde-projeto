@@ -1,7 +1,6 @@
 package arquivo;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.PixelGrabber;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -31,7 +30,6 @@ public class Arquivo {
             OutputStream output = new FileOutputStream(System.getProperty("user.dir").replace('\\', '/') + "/src/" + nome + extention);
             output.write(arqui);
             output.close();
-            System.out.println("Arquivo salvo");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -98,92 +96,52 @@ public class Arquivo {
         }
     }
 
-    public static int compareImage(String acesso, String comparar) {
-        
-        int porcen = 0;
-        try {
-            BufferedImage bis1 = ImageIO.read(new File(acesso));
-            BufferedImage bis2 = ImageIO.read(new File(comparar));
-
-            int cont = 0;
-
-            PixelGrabber grab1 = new PixelGrabber(bis1, 0, 0, -1, -1, false);
-            PixelGrabber grab2 = new PixelGrabber(bis2, 0, 0, -1, -1, false);
-
-            if (grab1.grabPixels() && grab2.grabPixels()) {
-                int largura1 = grab1.getWidth();
-                int altura1 = grab1.getHeight();
-                int largura2 = grab2.getWidth();
-                int altura2 = grab2.getHeight();
-
-                int[][] imageColors1 = new int[largura1][altura1];
-                int[] data1 = (int[]) grab1.getPixels();
-                for (int y = 0; y < altura1; y++) {
-                    for (int x = 0; x < largura1; x++) {
-                        imageColors1[x][y] = data1[(y * largura1) + x];
-                    }
-                }
-
-                int[][] imageColors2 = new int[largura2][altura2];
-                int[] data2 = (int[]) grab2.getPixels();
-                for (int y = 0; y < altura2; y++) {
-                    for (int x = 0; x < largura2; x++) {
-                        imageColors2[x][y] = data2[(y * largura2) + x];
-                    }
-                }
-                if (largura1 >= largura2 && altura1 >= altura2) {
-                    for (int i = 0; i < largura2; i++) {
-                        for (int j = 0; j < altura2; j++) {
-
-                            if (imageColors1[i][j] == imageColors2[i][j]) {
-                                cont++;
-                            }
-                        }
-                    }
-
-                }
-                if (largura1 < largura2 && altura1 < altura2) {
-                    for (int i = 0; i < largura1; i++) {
-                        for (int j = 0; j < altura1; j++) {
-
-                            if (imageColors1[i][j] == imageColors2[i][j]) {
-                                cont++;
-                            }
-                        }
-                    }
-
-                }
-                if (largura1 < largura2 && altura1 > altura2) {
-                    for (int i = 0; i < largura1; i++) {
-                        for (int j = 0; j < altura2; j++) {
-
-                            if (imageColors1[i][j] == imageColors2[i][j]) {
-                                cont++;
-                            }
-                        }
-                    }
-
-                }
-                if (largura1 > largura2 && altura1 < altura2) {
-                    for (int i = 0; i < largura2; i++) {
-                        for (int j = 0; j < altura1; j++) {
-
-                            if (imageColors1[i][j] == imageColors2[i][j]) {
-                                cont++;
-                            }
-                        }
-                    }
-
-                }
-
-            }
-
-            int total = bis1.getHeight() * bis1.getWidth();
-            porcen = (cont * 100) / total;
-             return porcen;
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static int compareImage(File original, File comparando) throws IOException {
+        BufferedImage file1 = ImageIO.read(original);
+        BufferedImage file2 = ImageIO.read(comparando);
+        int cont, cont2, total, porcen = 0, originalWidth, originalHeight, vintePCentoAltura;
+        if (file1.getHeight() % 2 == 1) {
+            originalHeight = (file1.getHeight() / 2) + 1;
+        } else {
+            originalHeight = (file1.getHeight() / 2);
         }
-         return porcen;
+        if (file1.getWidth() % 2 == 1) {
+            originalWidth = ((file1.getWidth() / 2) + 1);
+        } else {
+            originalWidth = ((file1.getWidth() / 2));
+        }
+        vintePCentoAltura = (int) (0.2 * originalHeight);
+        for (int i = 0; i < file2.getWidth(); i++) {
+            for (int j = 0; j < file2.getHeight(); j++) {
+                cont = 0;
+                cont2 = 0;
+                for (int k = 0; k < originalWidth; k++) {
+                    if (i + k >= file2.getWidth()) {
+                        break;
+                    }
+                    if (k == vintePCentoAltura) {
+                        if ((cont * 100) / (cont + cont2) <= 10) {
+                            break;
+                        }
+                    }
+                    for (int l = 0; l < originalHeight; l++) {
+                        if (j + l >= file2.getHeight()) {
+                            break;
+                        }
+                        if (file1.getRGB(k, l) == file2.getRGB(i + k, j + l)) {
+                            cont = cont + 1;
+                        } else {
+                            cont2 = cont2 + 1;
+                        }
+                    }
+                }
+                total = cont + cont2;
+                porcen = (cont * 100) / total;
+                if (porcen >= 90) {
+                    return porcen;
+                }
+            }
+        }
+        return porcen;
     }
 }

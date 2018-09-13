@@ -53,26 +53,29 @@ public class Executar {
                 ps.println("Nome arquivo enviado");
                 int fileSize = Integer.parseInt(s.nextLine());
                 ps.println("tamanho arquivo enviado");
-                System.out.println("Deu merda");
                 file = IOFile.receiveFile(cliente, fileSize);
                 Arquivo.emArquivo(file, "client", newString.TreatStrings.getExtension(nome));
-                CtrlFuncionario ctrl = new CtrlFuncionario(frmserver.getUser(), frmserver.getPassword());
+                
+                /*CtrlFuncionario ctrl = new CtrlFuncionario(frmserver.getUser(), frmserver.getPassword());
                 Funcionario[] fon = ctrl.getAll();
                 int resultado;
+                File comparar = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/" + "client" + TreatStrings.getExtension(nome));
                 for (int i = 0; i < fon.length; i++) {
-                    resultado = Arquivo.compareImage(System.getProperty("user.dir").replace('\\', '/') + "/src/" + "client" + TreatStrings.getExtension(nome), fon[i].getBiometria());
+                    File original = new File(fon[i].getBiometria());
+                    resultado = Arquivo.compareImage(original, comparar);
                     if(resultado>=80){
                         ps.println("true");
                         ps.println(fon[i].getNome());
                         ps.println(fon[i].getAcesso());
                     }else{
-                        ps.println("false");
+                        ps.println("true");
                     }
                 }
-                /*File trash = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/" + "client" + TreatStrings.getExtension(nome));
+                */
+                File trash = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/" + "client" + TreatStrings.getExtension(nome));
                 if(trash.exists()){
                     trash.delete();
-                }*/
+                }
             } catch (IOException ex) {
                 java.util.logging.Logger.getLogger(Executar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
