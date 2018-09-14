@@ -58,9 +58,12 @@ public class Executar {
                 Funcionario[] fon = ctrl.getAll();
                 int resultado;
                 File comparar = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/" + "client" + TreatStrings.getExtension(nome));
+                System.out.println(comparar);
                 boolean accepted = false;
                 for (Funcionario func : fon) {
                     File original = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/fingerprints/" + func.getBiometria());
+                    System.out.println(original);
+
                     resultado = Arquivo.compareImage(original, comparar);
                     if (resultado >= 80) {
                         accepted = true;

@@ -293,14 +293,14 @@ public class FrmFuncionario extends javax.swing.JFrame {
             File f = new File(jtfFoto.getText());
             f.delete();
             JOptionPane.showMessageDialog(null, "Removido com sucesso");
+            dispose();
         }
-        dispose();
+        
     }//GEN-LAST:event_jbRemoverActionPerformed
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
         Funcionario fon = new Funcionario();
-        //Itálo eva & adão
-        //está linha não tem commit
+        
         try {
             fon.setCodigo(Integer.parseInt(jtfCodigo.getText()));
             fon.setNome(jtfNome.getText());

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 public class Arquivo {
 
@@ -73,8 +74,6 @@ public class Arquivo {
         return b;
     }
 
-    
-
     public static void copyFile(File source, File destination) throws IOException {
         if (destination.exists()) {
             destination.delete();
@@ -99,6 +98,10 @@ public class Arquivo {
     public static int compareImage(File original, File comparando) throws IOException {
         BufferedImage file1 = ImageIO.read(original);
         BufferedImage file2 = ImageIO.read(comparando);
+
+        JOptionPane.showMessageDialog(null, original.toString());
+        JOptionPane.showMessageDialog(null, comparando.toString());
+
         int cont, cont2, total, porcen = 0, originalWidth, originalHeight, vintePCentoAltura;
         if (file1.getHeight() % 2 == 1) {
             originalHeight = (file1.getHeight() / 2) + 1;

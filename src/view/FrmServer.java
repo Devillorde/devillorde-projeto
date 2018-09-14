@@ -5,7 +5,6 @@ import java.awt.Toolkit;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import controller.*;
-import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -274,8 +273,9 @@ public class FrmServer extends javax.swing.JFrame {
                     FrmFuncionario ff = new FrmFuncionario(user, password);
                     ff.preencherRemover((int) jtTodos.getValueAt(jtTodos.getSelectedRow(), 0));
                     ff.setVisible(true);
+                    jtTodos.getSelectionModel().removeListSelectionListener(this);
                 }
-                jtTodos.getSelectionModel().removeListSelectionListener(this);
+                
             }
         });
     }//GEN-LAST:event_jbRemoverActionPerformed
@@ -294,8 +294,8 @@ public class FrmServer extends javax.swing.JFrame {
                         FrmFuncionario ff = new FrmFuncionario(user, password);
                         ff.preencherAlterar((int) jtTodos.getValueAt(jtTodos.getSelectedRow(), 0));
                         ff.setVisible(true);
+                        jtTodos.getSelectionModel().removeListSelectionListener(this);
                     }
-                    jtTodos.getSelectionModel().removeListSelectionListener(this);
                 }
             }
         });
@@ -307,13 +307,10 @@ public class FrmServer extends javax.swing.JFrame {
     }//GEN-LAST:event_jbAtualizarActionPerformed
 
     private void guiaServidorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_guiaServidorKeyPressed
-        // TODO add your handling code here:
     }//GEN-LAST:event_guiaServidorKeyPressed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        if(evt.getExtendedKeyCode()== KeyEvent.VK_TAB){
-            
-        }
+        
     }//GEN-LAST:event_formKeyPressed
 
     public static void main(String args[]) throws UnsupportedLookAndFeelException {
