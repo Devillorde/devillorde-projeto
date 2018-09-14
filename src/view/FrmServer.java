@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import controller.*;
+import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -17,6 +18,7 @@ import model.Funcionario;
 public class FrmServer extends javax.swing.JFrame {
 
     public FrmServer() {
+        
         initComponents();
         setIcon();
     }
@@ -53,7 +55,7 @@ public class FrmServer extends javax.swing.JFrame {
         start = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         log = new javax.swing.JTextArea();
-        jPanel1 = new javax.swing.JPanel();
+        jpBanco = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jtTodos = new javax.swing.JTable();
@@ -64,6 +66,17 @@ public class FrmServer extends javax.swing.JFrame {
         jbAtualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
+
+        guiaServidor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                guiaServidorKeyPressed(evt);
+            }
+        });
 
         lblLog.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblLog.setText("Log");
@@ -193,24 +206,24 @@ public class FrmServer extends javax.swing.JFrame {
                 .addComponent(jbAtualizar))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpBancoLayout = new javax.swing.GroupLayout(jpBanco);
+        jpBanco.setLayout(jpBancoLayout);
+        jpBancoLayout.setHorizontalGroup(
+            jpBancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpBancoLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jpBancoLayout.setVerticalGroup(
+            jpBancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(jpBancoLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        guiaServidor.addTab("Banco de dados", jPanel1);
+        guiaServidor.addTab("Banco de dados", jpBanco);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -293,6 +306,16 @@ public class FrmServer extends javax.swing.JFrame {
         preencher(ct.getAll());
     }//GEN-LAST:event_jbAtualizarActionPerformed
 
+    private void guiaServidorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_guiaServidorKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_guiaServidorKeyPressed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        if(evt.getExtendedKeyCode()== KeyEvent.VK_TAB){
+            
+        }
+    }//GEN-LAST:event_formKeyPressed
+
     public static void main(String args[]) throws UnsupportedLookAndFeelException {
 
         UIManager.setLookAndFeel(new SeaGlassLookAndFeel());
@@ -327,7 +350,6 @@ public class FrmServer extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane guiaServidor;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
@@ -336,6 +358,7 @@ public class FrmServer extends javax.swing.JFrame {
     private javax.swing.JButton jbEditar;
     private javax.swing.JButton jbIncluir;
     private javax.swing.JButton jbRemover;
+    private javax.swing.JPanel jpBanco;
     private javax.swing.JTable jtTodos;
     private javax.swing.JLabel lblLog;
     private javax.swing.JTextArea log;
