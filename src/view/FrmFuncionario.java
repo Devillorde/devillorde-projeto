@@ -265,7 +265,7 @@ public class FrmFuncionario extends javax.swing.JFrame {
         try {
             String extention = TreatStrings.getExtension(jtfFoto.getText());
             fon.setNome(jtfNome.getText());
-            fon.setBiometria(System.getProperty("user.dir").replace('\\', '/') + "/src/fingerprints/" + jtfNome.getText() + extention);
+            fon.setBiometria(jtfNome.getText() + extention);
             fon.setAcesso(Integer.parseInt((String) jcbNivel.getSelectedItem()));
             ct.salvarCtrl(fon);
             File input = new File(jtfFoto.getText());

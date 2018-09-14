@@ -60,7 +60,7 @@ public class Executar {
                 File comparar = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/" + "client" + TreatStrings.getExtension(nome));
                 boolean accepted = false;
                 for (Funcionario func : fon) {
-                    File original = new File(func.getBiometria());
+                    File original = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/fingerprints/" + func.getBiometria());
                     resultado = Arquivo.compareImage(original, comparar);
                     if (resultado >= 80) {
                         accepted = true;
