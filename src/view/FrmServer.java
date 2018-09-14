@@ -246,7 +246,7 @@ public class FrmServer extends javax.swing.JFrame {
     }//GEN-LAST:event_startActionPerformed
 
     private void jbIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIncluirActionPerformed
-        FrmFuncionario fr = new FrmFuncionario(user,password);
+        FrmFuncionario fr = new FrmFuncionario(user, password);
         fr.desativaCod();
         fr.setVisible(true);
     }//GEN-LAST:event_jbIncluirActionPerformed
@@ -258,10 +258,11 @@ public class FrmServer extends javax.swing.JFrame {
             public void valueChanged(ListSelectionEvent event) {
                 if (jtTodos.getSelectedRow() > -1) {
 
-                    FrmFuncionario ff = new FrmFuncionario(user,password);
+                    FrmFuncionario ff = new FrmFuncionario(user, password);
                     ff.preencherRemover((int) jtTodos.getValueAt(jtTodos.getSelectedRow(), 0));
                     ff.setVisible(true);
                 }
+                jtTodos.getSelectionModel().removeListSelectionListener(this);
             }
         });
     }//GEN-LAST:event_jbRemoverActionPerformed
@@ -277,10 +278,11 @@ public class FrmServer extends javax.swing.JFrame {
                     int x = JOptionPane.showOptionDialog(null, "Deseja editar o Código " + jtTodos.getValueAt(jtTodos.getSelectedRow(), 0),
                             "Você tem certeza disso?", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opc, opc[0]);
                     if (x == 0) {
-                        FrmFuncionario ff = new FrmFuncionario(user,password);
+                        FrmFuncionario ff = new FrmFuncionario(user, password);
                         ff.preencherAlterar((int) jtTodos.getValueAt(jtTodos.getSelectedRow(), 0));
                         ff.setVisible(true);
                     }
+                    jtTodos.getSelectionModel().removeListSelectionListener(this);
                 }
             }
         });
@@ -361,7 +363,7 @@ public class FrmServer extends javax.swing.JFrame {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ServerIcon.png")));
     }
