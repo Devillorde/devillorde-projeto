@@ -26,14 +26,13 @@ public class FrmFuncionario extends javax.swing.JFrame {
     }
 
     public void preencher(int codigo) {
-        //ct = new CtrlFuncionario();
         Funcionario fon = ct.getFuncionario(codigo);
 
         jtfCodigo.setText(String.valueOf(fon.getCodigo()));
         jtfNome.setText(fon.getNome());
         jtfFoto.setText(fon.getBiometria());
 
-        Image imagem = java.awt.Toolkit.getDefaultToolkit().getImage(fon.getBiometria());
+        Image imagem = java.awt.Toolkit.getDefaultToolkit().getImage(System.getProperty("user.dir").replace('\\', '/') + "/src/fingerprints/"+fon.getBiometria());
 
         jlFoto.setIcon(new javax.swing.ImageIcon(imagem));
 
@@ -290,7 +289,7 @@ public class FrmFuncionario extends javax.swing.JFrame {
                 "Você tem certeza disso?", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opc, opc[0]);
         if (x == 0) {
             ct.deleteCtrl(Integer.parseInt(jtfCodigo.getText()));
-            File f = new File(jtfFoto.getText());
+            File f = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/fingerprints/"+jtfFoto.getText());
             f.delete();
             JOptionPane.showMessageDialog(null, "Removido com sucesso");
             dispose();

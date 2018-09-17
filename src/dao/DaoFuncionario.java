@@ -13,8 +13,7 @@ private String password,user;
     }
     
     public int salvarDAO(Funcionario funcionario) {
-        //conexao = new ConexaoMySql();
-
+        
         try {
             conexao.conectar();
             String sql = "INSERT INTO funcionario (nome,digital,acesso) VALUES ('" + funcionario.getNome() + "','" + funcionario.getBiometria() + "'," + funcionario.getAcesso() + ");";
@@ -28,7 +27,6 @@ private String password,user;
     }
 
     public boolean excluirDAO(int codigo) {
-        //conexao = new ConexaoMySql();
 
         try {
             conexao.conectar();
@@ -44,7 +42,6 @@ private String password,user;
     }
 
     public boolean updateDAO(Funcionario funcionario) {
-        //conexao = new ConexaoMySql();
 
         try {
             conexao.conectar();
@@ -60,7 +57,6 @@ private String password,user;
     }
 
     public Funcionario getFuncionario(int codigo) {
-        //conexao = new ConexaoMySql();
         Funcionario fon = new Funcionario();
 
         try {
@@ -85,7 +81,6 @@ private String password,user;
     }
 
     public Funcionario[] getAll() {
-        //conexao = new ConexaoMySql();
         Funcionario[] fon = {};
 
         try {
