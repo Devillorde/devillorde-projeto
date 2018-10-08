@@ -26,7 +26,7 @@ public class TreatStrings
     }
     public static String getExtension(String word){
         String newWord="";
-        for(int i=0;i<word.length();i++){
+        for(int i=word.length()-1;i>0;i--){
             if(word.charAt(i)=='.'){
                 for(int j=i;j<i+4;j++){
                     newWord=newWord+word.charAt(j);
@@ -166,6 +166,6 @@ public class TreatStrings
     }
     public static void main(String[]args)
     {
-        System.out.println(getExtension("renato.jpg"));
+        System.out.println(getExtension("renato.Freitas.jpg"));
     }
 }

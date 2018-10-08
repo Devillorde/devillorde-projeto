@@ -18,6 +18,7 @@ public class Executar {
     private java.net.Socket cliente;
     private java.net.ServerSocket servidor;
     private List<PrintStream> clientes;
+    private Thread[] thread;
 
     public Executar(FrmServer frmserver) {
         this.frmserver = frmserver;
@@ -27,11 +28,10 @@ public class Executar {
         public void run() {
             clientes = new ArrayList<PrintStream>();
             while (true) {
-                PrintStream ps = null;
                 try {
                     cliente = servidor.accept();
                     frmserver.setLog("Cliente: " + cliente.getInetAddress().getHostAddress() + " conectou!");
-                    ps = new PrintStream(cliente.getOutputStream());
+                    PrintStream ps = new PrintStream(cliente.getOutputStream());
                     clientes.add(ps);
                 } catch (IOException ex) {
                     javax.swing.JOptionPane.showMessageDialog(frmserver, "Erro ao conectar cliente!", "ERRO!!!", javax.swing.JOptionPane.ERROR_MESSAGE);
@@ -56,28 +56,38 @@ public class Executar {
 
                 CtrlFuncionario ctrl = new CtrlFuncionario(frmserver.getUser(), frmserver.getPassword());
                 Funcionario[] fon = ctrl.getAll();
-                int resultado;
-                File comparar = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/" + "client" + TreatStrings.getExtension(nome));
-                boolean accepted = false;
+                int i = 0;
+                thread = new Thread[fon.length];
                 for (Funcionario func : fon) {
-                    File original = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/fingerprints/" + func.getBiometria());
+                    thread[i] = new Thread() {
+                        public void run() {
+                            boolean accepted = false;
+                            File comparar = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/" + "client" + TreatStrings.getExtension(nome));
+                            File original = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/fingerprints/" + func.getBiometria());
+                            try {
+                                int resultado = Arquivo.compareImage(original, comparar);
+                                if (resultado >= 80) {
+                                    accepted = true;
+                                    ps.println("true");
+                                    ps.println(func.getNome());
+                                    ps.println(func.getAcesso());
+                                    if (accepted == false) {
+                                        ps.println("false");
+                                    }
+                                    File trash = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/" + "client" + TreatStrings.getExtension(nome));
+                                    if (trash.exists()) {
+                                        trash.delete();
+                                    }
+                                }
+                                thread = null;
+                            } catch (IOException ex) {
+                            }
+                        }
+                    };
+                    thread[i].start();
+                    i++;
+                }
 
-                    resultado = Arquivo.compareImage(original, comparar);
-                    if (resultado >= 80) {
-                        accepted = true;
-                        ps.println("true");
-                        ps.println(func.getNome());
-                        ps.println(func.getAcesso());
-                        break;
-                    }
-                }
-                if (accepted == false) {
-                    ps.println("false");
-                }
-                File trash = new File(System.getProperty("user.dir").replace('\\', '/') + "/src/" + "client" + TreatStrings.getExtension(nome));
-                if (trash.exists()) {
-                    trash.delete();
-                }
             } catch (IOException ex) {
                 java.util.logging.Logger.getLogger(Executar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }

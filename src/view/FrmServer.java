@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import controller.*;
+import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -307,6 +308,16 @@ public class FrmServer extends javax.swing.JFrame {
     }//GEN-LAST:event_jbAtualizarActionPerformed
 
     private void guiaServidorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_guiaServidorKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_TAB) {
+            if (evt.isShiftDown()) {
+                if(guiaServidor.getSelectedComponent()==pServer){
+                    guiaServidor.setSelectedComponent(jpBanco);
+                }else{
+                    guiaServidor.setSelectedComponent(pServer);
+                }
+                
+            }
+        }
     }//GEN-LAST:event_guiaServidorKeyPressed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
